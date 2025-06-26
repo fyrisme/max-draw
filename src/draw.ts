@@ -7,6 +7,7 @@ const themeCss = `
 .object .bg { fill : #444; }
 .message .bg { fill: url(#messageBg); rx: 4; }
 .fg-stroke { fill: none; stroke: #888; stroke-width: 2; }
+.fg-fill { fill: #888; }
 .port { fill: #333; stroke: #777; stroke-width: 1; }
 .cable { stroke-linecap: round; }
 .label {
@@ -97,7 +98,17 @@ export function drawPatch(patch: Patch) {
     const { x, y, width, height } = obj.rect;
     const clipId = getClipId(obj);
 
-    const known = ['box', 'message', 'number', 'button', 'toggle'];
+    // todo make a table of callbacks and infer this or something?
+    const known = [
+      'box',
+      'message',
+      'number',
+      'button',
+      'toggle',
+      'flonum',
+      'inlet',
+      'outlet',
+    ];
 
     let attrs = `transform="translate(${x.toFixed(1)}, ${y.toFixed(1)})"`;
 
@@ -121,6 +132,7 @@ export function drawPatch(patch: Patch) {
 
     if (obj.type === 'box' || obj.type === 'message') label = obj.text;
     if (obj.type == 'number') label = '▶︎ 0';
+    if (obj.type == 'flonum') label = '▶︎ 0.';
     if (!known.includes(obj.type)) label = obj.type;
 
     if (label) {
@@ -150,7 +162,19 @@ export function drawPatch(patch: Patch) {
       );
     }
 
-    // todo handle missing and unknown obeject types
+    if (obj.type === 'inlet' || obj.type === 'outlet') {
+      const cx = width / 2;
+      const cy = height / 2;
+      const s = 6;
+      const points = [
+        `${cx - s},${cy - s}`,
+        `${cx + s},${cy - s}`,
+        `${cx},${cy + s}`,
+      ]
+        .map((p) => p.replace(/\.0\b/, ''))
+        .join(' ');
+      body.push(`<polygon points="${points}" class="fg-fill"></polygon>`);
+    }
 
     const portPadding = 10;
     const portArea = width - portPadding * 2;

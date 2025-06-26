@@ -1,6 +1,6 @@
 import { Bounds, Color, numbersToPoints, Point, Rect } from './math';
 
-export type PatchObjType = 'box' | 'message' | 'number' | 'button' | 'toggle';
+export type PatchObjType = 'box' | 'message' | 'number' | 'button' | 'toggle' | 'flonum' | 'inlet' | 'outlet';
 
 export interface PatchObj {
   type: PatchObjType;

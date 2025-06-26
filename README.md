@@ -4,7 +4,7 @@ Converts Max patcher files in JSON format to SVG images.
 
 Work in progress, supported features:
 
-- Text-like box objects, message boxes, `toggle`, `button`, `number`
+- Text-like box objects, message boxes, `toggle`, `button`, `number`, `flonum`, `inlet`, `outlet`
 - Signal and event cables, with custom colors and bend points
 - Resized objects
 
