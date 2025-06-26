@@ -1,0 +1,243 @@
+{
+  "boxes": [
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "cycle~ 440",
+        "numoutlets": 1,
+        "outlettype": ["signal"],
+        "patching_rect": [22.377622604370117, 144.086027860641479, 66.0, 22.0],
+        "numinlets": 2,
+        "id": "obj-9"
+      }
+    },
+    {
+      "box": {
+        "maxclass": "ezdac~",
+        "numoutlets": 0,
+        "patching_rect": [22.377622604370117, 201.612912118434906, 45.0, 45.0],
+        "numinlets": 2,
+        "id": "obj-7"
+      }
+    },
+    {
+      "box": {
+        "maxclass": "message",
+        "text": "message box",
+        "numoutlets": 1,
+        "outlettype": [""],
+        "patching_rect": [
+          91.979130625724792, 201.612912118434906, 114.1176518201828, 22.0
+        ],
+        "numinlets": 2,
+        "id": "obj-31",
+        "gradient": 1,
+        "bgcolor": [0.301961, 0.301961, 0.301961, 1],
+        "bgcolor2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_type": "gradient",
+        "bgfillcolor_color1": [0.301961, 0.301961, 0.301961, 1],
+        "bgfillcolor_color2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_color": [0.2, 0.2, 0.2, 1]
+      }
+    },
+    {
+      "box": {
+        "maxclass": "message",
+        "text": "message box",
+        "numoutlets": 1,
+        "outlettype": [""],
+        "patching_rect": [
+          238.709687948226929, 201.612912118434906, 96.470592260360718, 22.0
+        ],
+        "numinlets": 2,
+        "id": "obj-30",
+        "gradient": 1,
+        "bgcolor": [0.301961, 0.301961, 0.301961, 1],
+        "bgcolor2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_type": "gradient",
+        "bgfillcolor_color1": [0.301961, 0.301961, 0.301961, 1],
+        "bgfillcolor_color2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_color": [0.2, 0.2, 0.2, 1]
+      }
+    },
+    {
+      "box": {
+        "maxclass": "message",
+        "text": "message box",
+        "numoutlets": 1,
+        "outlettype": [""],
+        "patching_rect": [
+          205.376353144645691, 110.752693057060242, 111.764710545539856, 22.0
+        ],
+        "numinlets": 2,
+        "id": "obj-27",
+        "gradient": 1,
+        "bgcolor": [0.301961, 0.301961, 0.301961, 1],
+        "bgcolor2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_type": "gradient",
+        "bgfillcolor_color1": [0.301961, 0.301961, 0.301961, 1],
+        "bgfillcolor_color2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_color": [0.2, 0.2, 0.2, 1]
+      }
+    },
+    {
+      "box": {
+        "maxclass": "message",
+        "text": "message box but like really long and stuff and things and stuff and things",
+        "linecount": 3,
+        "numoutlets": 1,
+        "outlettype": [""],
+        "patching_rect": [
+          194.086030066013336, 26.881721615791321, 149.411770939826965, 49.0
+        ],
+        "numinlets": 2,
+        "id": "obj-25",
+        "gradient": 1,
+        "bgcolor": [0.301961, 0.301961, 0.301961, 1],
+        "bgcolor2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_type": "gradient",
+        "bgfillcolor_color1": [0.301961, 0.301961, 0.301961, 1],
+        "bgfillcolor_color2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_color": [0.2, 0.2, 0.2, 1]
+      }
+    },
+    {
+      "box": {
+        "maxclass": "message",
+        "text": "message box",
+        "numoutlets": 1,
+        "outlettype": [""],
+        "patching_rect": [187.096782445907593, 144.086027860641479, 80.0, 22.0],
+        "numinlets": 2,
+        "id": "obj-24",
+        "gradient": 1,
+        "bgcolor": [0.301961, 0.301961, 0.301961, 1],
+        "bgcolor2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_type": "gradient",
+        "bgfillcolor_color1": [0.301961, 0.301961, 0.301961, 1],
+        "bgfillcolor_color2": [0.2, 0.2, 0.2, 1],
+        "bgfillcolor_color": [0.2, 0.2, 0.2, 1]
+      }
+    },
+    {
+      "box": {
+        "maxclass": "number",
+        "numoutlets": 2,
+        "outlettype": ["", "bang"],
+        "patching_rect": [111.888113021850586, 144.055945515632629, 50.0, 22.0],
+        "numinlets": 1,
+        "id": "obj-8",
+        "parameter_enable": 0
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "counter",
+        "numoutlets": 4,
+        "outlettype": ["int", "", "", "int"],
+        "patching_rect": [97.311832249164581, 90.322584629058838, 61.0, 22.0],
+        "numinlets": 5,
+        "id": "obj-6"
+      }
+    },
+    {
+      "box": {
+        "maxclass": "button",
+        "numoutlets": 1,
+        "outlettype": ["bang"],
+        "patching_rect": [36.559141397476196, 25.806452751159668, 24.0, 24.0],
+        "numinlets": 1,
+        "id": "obj-5",
+        "parameter_enable": 0
+      }
+    },
+    {
+      "box": {
+        "maxclass": "toggle",
+        "numoutlets": 1,
+        "outlettype": ["int"],
+        "patching_rect": [36.559141397476196, 89.247315764427185, 24.0, 24.0],
+        "numinlets": 1,
+        "id": "obj-3",
+        "parameter_enable": 0
+      }
+    }
+  ],
+  "lines": [
+    {
+      "patchline": {
+        "source": ["obj-9", 0],
+        "destination": ["obj-7", 1],
+        "order": 0
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-9", 0],
+        "destination": ["obj-7", 0],
+        "order": 1
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-24", 0],
+        "destination": ["obj-31", 1],
+        "order": 2
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-24", 0],
+        "destination": ["obj-30", 1],
+        "color": [0.996220171451569, 0.812926054000854, 0.056962098926306, 1.0],
+        "order": 0
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-24", 0],
+        "destination": ["obj-27", 1],
+        "midpoints": [
+          196.596782445907593, 176.086027860641479, 175.848542898893356,
+          176.086027860641479, 175.848542898893356, 89.041377782821655,
+          307.641063690185547, 89.041377782821655
+        ],
+        "order": 1
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-6", 0],
+        "destination": ["obj-8", 0]
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-5", 0],
+        "destination": ["obj-6", 0],
+        "color": [0.298491954803467, 0.735762178897858, 0.949655771255493, 1.0],
+        "midpoints": [
+          46.059141397476196, 69.319604963064194, 106.811832249164581,
+          69.319604963064194
+        ],
+        "order": 0
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-5", 0],
+        "destination": ["obj-3", 0],
+        "order": 1
+      }
+    }
+  ],
+  "appversion": {
+    "major": 8,
+    "minor": 6,
+    "revision": 3,
+    "architecture": "x64",
+    "modernui": 1
+  },
+  "classnamespace": "box"
+}

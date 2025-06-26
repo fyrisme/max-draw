@@ -1,0 +1,188 @@
+{
+  "boxes": [
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "+",
+        "outlettype": [""],
+        "id": "obj-11",
+        "numinlets": 2,
+        "patching_rect": [54.0, 134.61540162563324, 29.5, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "+",
+        "outlettype": [""],
+        "id": "obj-10",
+        "numinlets": 2,
+        "patching_rect": [226.679517149925232, 81.0, 29.5, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "+",
+        "outlettype": [""],
+        "id": "obj-9",
+        "numinlets": 2,
+        "patching_rect": [146.907225251197815, 81.0, 29.5, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "in 1",
+        "outlettype": [""],
+        "id": "obj-7",
+        "numinlets": 0,
+        "patching_rect": [180.769253611564636, 14.0, 28.0, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "in 2",
+        "outlettype": [""],
+        "id": "obj-8",
+        "numinlets": 0,
+        "patching_rect": [237.179517149925232, 14.0, 28.0, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "in 1",
+        "outlettype": [""],
+        "id": "obj-1",
+        "numinlets": 0,
+        "patching_rect": [54.0, 14.0, 28.0, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "in 2",
+        "outlettype": [""],
+        "id": "obj-2",
+        "numinlets": 0,
+        "patching_rect": [110.897449910640717, 14.0, 28.0, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "+",
+        "outlettype": [""],
+        "id": "obj-3",
+        "numinlets": 2,
+        "patching_rect": [54.0, 81.0, 29.5, 22.0],
+        "numoutlets": 1
+      }
+    },
+    {
+      "box": {
+        "maxclass": "newobj",
+        "text": "out 1",
+        "id": "obj-4",
+        "numinlets": 1,
+        "patching_rect": [53.846160650253296, 171.153867781162262, 35.0, 22.0],
+        "numoutlets": 0
+      }
+    }
+  ],
+  "lines": [
+    {
+      "patchline": {
+        "source": ["obj-8", 0],
+        "destination": ["obj-10", 1],
+        "midpoints": [269.587644934654236, 58.762890100479126]
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-9", 0],
+        "destination": ["obj-11", 1],
+        "midpoints": [
+          156.407225251197815, 118.30770081281662, 74.0, 118.30770081281662
+        ]
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-11", 0],
+        "destination": ["obj-4", 0]
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-3", 0],
+        "destination": ["obj-11", 0]
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-1", 0],
+        "destination": ["obj-9", 1],
+        "midpoints": [
+          63.5, 64.41025722026825, 166.907225251197815, 64.41025722026825
+        ],
+        "order": 0
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-7", 0],
+        "destination": ["obj-10", 0],
+        "midpoints": [
+          190.269253611564636, 48.384614169597626, 236.179517149925232,
+          48.384614169597626
+        ]
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-2", 0],
+        "destination": ["obj-9", 0],
+        "midpoints": [
+          120.397449910640717, 47.102562725543976, 156.407225251197815,
+          47.102562725543976
+        ],
+        "order": 0
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-2", 0],
+        "destination": ["obj-3", 1],
+        "midpoints": [
+          120.397449910640717, 47.743588447570801, 74.0, 47.743588447570801
+        ],
+        "order": 1
+      }
+    },
+    {
+      "patchline": {
+        "source": ["obj-1", 0],
+        "destination": ["obj-3", 0],
+        "order": 1
+      }
+    }
+  ],
+  "appversion": {
+    "major": 8,
+    "minor": 6,
+    "revision": 3,
+    "architecture": "x64",
+    "modernui": 1
+  },
+  "classnamespace": "dsp.gen"
+}

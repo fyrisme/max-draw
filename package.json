@@ -1,0 +1,11 @@
+{
+  "name": "max-draw",
+  "version": "0.0.1",
+  "author": "fyris",
+  "description": "convert max patchers to svg images",
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "@types/node": "^24.0.4"
+  }
+}
