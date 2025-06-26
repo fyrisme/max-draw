@@ -97,10 +97,13 @@ export function drawPatch(patch: Patch) {
     const { x, y, width, height } = obj.rect;
     const clipId = getClipId(obj);
 
-    const transform = `transform="translate(${x.toFixed(1)}, ${y.toFixed(1)})"`;
-    body.push(
-      `<g class="object ${obj.type}" mask="url(#${clipId})" ${transform}>`
-    );
+    const known = ['box', 'message', 'number', 'button', 'toggle'];
+
+    let attrs = `transform="translate(${x.toFixed(1)}, ${y.toFixed(1)})"`;
+
+    if (!known.includes(obj.type)) attrs += ` opacity="0.5"`;
+
+    body.push(`<g class="object ${obj.type}" ${attrs}>`);
 
     body.push(
       `<rect x="0" y="0" width="${width}" height="${height}" class="bg"></rect>`
@@ -114,11 +117,16 @@ export function drawPatch(patch: Patch) {
       body.push(`<rect y="${height - size}" ${common}></rect>`);
     }
 
-    if (obj.type === 'message' || obj.type === 'box' || obj.type === 'number') {
-      if (obj.type == 'number') obj.text = '▶︎ 0';
+    let label = '';
+
+    if (obj.type === 'box' || obj.type === 'message') label = obj.text;
+    if (obj.type == 'number') label = '▶︎ 0';
+    if (!known.includes(obj.type)) label = obj.type;
+
+    if (label) {
       body.push(
         `<foreignObject x="0" y="0" width="${width}" height="${height}">`,
-        `<div class="label" xmlns="http://www.w3.org/1999/xhtml"><span>${obj.text}</span></div>`,
+        `<div class="label" xmlns="http://www.w3.org/1999/xhtml"><span>${label}</span></div>`,
         `</foreignObject>`
       );
     }
@@ -154,7 +162,7 @@ export function drawPatch(patch: Patch) {
       const port = new Point(portX + x, portY + y);
       portLocations.set(portId, port);
       body.push(
-        `<circle cx="${portX}" cy="${portY}" r="3" class="port inlet" id="${portId}"></circle>`
+        `<circle cx="${portX}" cy="${portY}" r="3" class="port inlet" id="${portId}" mask="url(#${clipId})"></circle>`
       );
     }
 
@@ -165,7 +173,7 @@ export function drawPatch(patch: Patch) {
       const port = new Point(portX + x, portY + y);
       portLocations.set(portId, port);
       body.push(
-        `<circle cx="${portX}" cy="${portY}" r="3" class="port outlet" id="${portId}"></circle>`
+        `<circle cx="${portX}" cy="${portY}" r="3" class="port outlet" id="${portId}" mask="url(#${clipId})"></circle>`
       );
     }
 
