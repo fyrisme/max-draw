@@ -5,7 +5,7 @@
   "description": "convert max patchers to svg images",
   "type": "module",
   "scripts": {
-    "gh-pages-build": "npx vite build converter --emptyOutDir --outDir ../docs"
+    "gh-pages-build": "npx vite build converter --emptyOutDir --outDir ../docs --base ./"
   },
   "devDependencies": {
     "@types/node": "^24.0.4"
