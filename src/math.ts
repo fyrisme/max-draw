@@ -42,12 +42,7 @@ export function numbersToPoints(values: number[]) {
 }
 
 export class Rect {
-  constructor(
-    public x = 0,
-    public y = 0,
-    public width = 0,
-    public height = 0
-  ) {}
+  constructor(public x = 0, public y = 0, public w = 0, public h = 0) {}
 }
 
 export class Bounds {
@@ -65,7 +60,7 @@ export class Bounds {
 
   includeRect(rect: Rect) {
     this.includePoint(rect.x, rect.y);
-    this.includePoint(rect.x + rect.width, rect.y + rect.height);
+    this.includePoint(rect.x + rect.w, rect.y + rect.h);
   }
 
   toRect() {

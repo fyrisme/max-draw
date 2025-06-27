@@ -1,6 +1,15 @@
 import { Bounds, Color, numbersToPoints, Point, Rect } from './math';
 
-export type PatchObjType = 'box' | 'message' | 'number' | 'button' | 'toggle' | 'flonum' | 'inlet' | 'outlet';
+export type PatchObjType =
+  | 'box'
+  | 'message'
+  | 'number'
+  | 'button'
+  | 'toggle'
+  | 'flonum'
+  | 'inlet'
+  | 'outlet'
+  | 'comment';
 
 export interface PatchObj {
   type: PatchObjType;
@@ -20,7 +29,7 @@ export interface PatchLine {
   color?: Color;
 }
 
-export class Patch {
+export class Patcher {
   objects: PatchObj[] = [];
   lines: PatchLine[] = [];
   padding = 10;
@@ -49,11 +58,17 @@ export class Patch {
     }
   }
 
-  static parse(data: any): Patch {
-    const patch = new Patch();
+  static parse(data: any): Patcher {
+    const patch = new Patcher();
+
+    // support both .maxpat and lil bits of snippet json
+    const patchData = {
+      boxes: data.boxes ?? data.patcher?.boxes ?? [],
+      lines: data.lines ?? data.patcher?.lines ?? [],
+    };
 
     // handle objects
-    for (const { box } of data.boxes) {
+    for (const { box } of patchData.boxes) {
       const [x, y, width, height] = box.patching_rect;
       const rect = new Rect(x, y, width, height);
       let type = box.maxclass;
@@ -71,7 +86,7 @@ export class Patch {
     }
 
     // handle connections
-    for (const rawline of data.lines || []) {
+    for (const rawline of patchData.lines || []) {
       const patchLine = rawline.patchline;
       if (patchLine) {
         const { source, destination, midpoints: rawMidpoints } = patchLine;

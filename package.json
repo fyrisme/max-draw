@@ -4,8 +4,13 @@
   "author": "fyris",
   "description": "convert max patchers to svg images",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "gh-pages-build": "npx vite build converter --emptyOutDir --outDir ../docs"
+  },
   "devDependencies": {
     "@types/node": "^24.0.4"
+  },
+  "dependencies": {
+    "vite": "^7.0.0"
   }
 }

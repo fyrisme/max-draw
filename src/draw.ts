@@ -1,11 +1,11 @@
 import { Point } from './math';
-import { Patch, PatchObj } from './patch';
+import { Patcher, PatchObj } from './patcher';
 
 // todo theme support
 
 const themeCss = `
 .object .bg { fill : #444; }
-.message .bg { fill: url(#messageBg); rx: 4; }
+.message .bg { fill: url(#messageBg); rx: 4px; }
 .fg-stroke { fill: none; stroke: #888; stroke-width: 2; }
 .fg-fill { fill: #888; }
 .port { fill: #333; stroke: #777; stroke-width: 1; }
@@ -64,14 +64,17 @@ function cablePath(points: Point[]): string {
     .join(' ');
 }
 
-export function drawPatch(patch: Patch) {
+// useRandomIds will append randomness to IDs to prevent conflicts if rendering multiple patches inline into the same web page!
+export function drawPatch(patch: Patcher, useRandomIds = true) {
   // make sure ids are unique if multiple patches are drawn on the same page
   const drawId = Math.random().toString(36).substring(2, 15);
-  const getClipId = (obj: PatchObj) => `clip-${obj.id}-${drawId}`;
+
+  let getClipId = (obj: PatchObj) => `clip-${obj.id}`;
+  if(useRandomIds) getClipId = (obj: PatchObj) => `clip-${obj.id}-${drawId}`;
 
   const bounds = patch.calculateBounds().toRect();
-  const width = bounds.width + patch.padding * 2;
-  const height = bounds.height + patch.padding * 2;
+  const width = bounds.w + patch.padding * 2;
+  const height = bounds.h + patch.padding * 2;
 
   const body: string[] = [];
   const defs: string[] = [];
@@ -84,7 +87,7 @@ export function drawPatch(patch: Patch) {
   );
 
   for (const obj of patch.objects) {
-    const { width, height } = obj.rect;
+    const { w: width, h: height } = obj.rect;
     defs.push(
       `<mask id="${getClipId(obj)}">`,
       `<rect x="0" y="0" width="${width}" height="${height}" fill="#ffffff"></rect>`,
@@ -95,7 +98,7 @@ export function drawPatch(patch: Patch) {
   const portLocations = new Map<string, Point>();
 
   for (const obj of patch.objects) {
-    const { x, y, width, height } = obj.rect;
+    const { x, y, w, h } = obj.rect;
     const clipId = getClipId(obj);
 
     // todo make a table of callbacks and infer this or something?
@@ -108,6 +111,7 @@ export function drawPatch(patch: Patch) {
       'flonum',
       'inlet',
       'outlet',
+      'comment',
     ];
 
     let attrs = `transform="translate(${x.toFixed(1)}, ${y.toFixed(1)})"`;
@@ -116,46 +120,51 @@ export function drawPatch(patch: Patch) {
 
     body.push(`<g class="object ${obj.type}" ${attrs}>`);
 
-    body.push(
-      `<rect x="0" y="0" width="${width}" height="${height}" class="bg"></rect>`
-    );
+    // all objects except comments have a background rect
+    // fill is determined by class in the styles
+    if (obj.type != 'comment') {
+      body.push(
+        `<rect x="0" y="0" width="${w}" height="${h}" class="bg"></rect>`
+      );
+    }
 
     if (obj.type === 'box') {
       // top and bottom accent lines
       const size = 3;
-      const common = `x="0" width="${width}" height="${size}" fill="#fff3"`;
+      const common = `x="0" width="${w}" height="${size}" fill="#fff3"`;
       body.push(`<rect y="0" ${common}></rect>`);
-      body.push(`<rect y="${height - size}" ${common}></rect>`);
+      body.push(`<rect y="${h - size}" ${common}></rect>`);
     }
 
     let label = '';
 
-    if (obj.type === 'box' || obj.type === 'message') label = obj.text;
+    const usesText = ['box', 'message', 'comment'];
+    if (usesText.includes(obj.type)) label = obj.text;
     if (obj.type == 'number') label = '▶︎ 0';
     if (obj.type == 'flonum') label = '▶︎ 0.';
     if (!known.includes(obj.type)) label = obj.type;
 
     if (label) {
       body.push(
-        `<foreignObject x="0" y="0" width="${width}" height="${height}">`,
+        `<foreignObject x="0" y="0" width="${w}" height="${h}">`,
         `<div class="label" xmlns="http://www.w3.org/1999/xhtml"><span>${label}</span></div>`,
         `</foreignObject>`
       );
     }
 
     if (obj.type === 'button') {
-      const cx = (width / 2).toFixed(1);
-      const cy = (height / 2).toFixed(1);
+      const cx = (w / 2).toFixed(1);
+      const cy = (h / 2).toFixed(1);
       body.push(
         `<circle cx="${cx}" cy="${cy}" r="6" class="fg-stroke"></circle>`
       );
     }
 
     if (obj.type === 'toggle') {
-      const x1 = (width / 4).toFixed(1);
-      const y1 = (height / 4).toFixed(1);
-      const x2 = (width * (3 / 4)).toFixed(1);
-      const y2 = (height * (3 / 4)).toFixed(1);
+      const x1 = (w / 4).toFixed(1);
+      const y1 = (h / 4).toFixed(1);
+      const x2 = (w * (3 / 4)).toFixed(1);
+      const y2 = (h * (3 / 4)).toFixed(1);
       body.push(
         `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="fg-stroke"></line>`,
         `<line x1="${x2}" y1="${y1}" x2="${x1}" y2="${y2}" class="fg-stroke"></line>`
@@ -163,8 +172,8 @@ export function drawPatch(patch: Patch) {
     }
 
     if (obj.type === 'inlet' || obj.type === 'outlet') {
-      const cx = width / 2;
-      const cy = height / 2;
+      const cx = w / 2;
+      const cy = h / 2;
       const s = 6;
       const points = [
         `${cx - s},${cy - s}`,
@@ -177,7 +186,7 @@ export function drawPatch(patch: Patch) {
     }
 
     const portPadding = 10;
-    const portArea = width - portPadding * 2;
+    const portArea = w - portPadding * 2;
 
     for (let i = 0; i < obj.inletCount; i++) {
       const portX = portPadding + (portArea / (obj.inletCount - 1 || 1)) * i;
@@ -192,7 +201,7 @@ export function drawPatch(patch: Patch) {
 
     for (let i = 0; i < obj.outletCount; i++) {
       const portX = portPadding + (portArea / (obj.outletCount - 1 || 1)) * i;
-      const portY = height;
+      const portY = h;
       const portId = `${obj.id}-o${i}`;
       const port = new Point(portX + x, portY + y);
       portLocations.set(portId, port);

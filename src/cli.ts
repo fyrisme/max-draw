@@ -1,7 +1,7 @@
 // todo use an actual cli builder library
 
 import * as fs from 'fs';
-import { Patch } from './patch';
+import { Patcher } from './patcher';
 import { drawPatch } from './draw';
 
 const patchPath = process.argv[2];
@@ -12,8 +12,8 @@ if (!patchPath) {
 
 const patchText = fs.readFileSync(patchPath, 'utf-8');
 const patchJson = JSON.parse(patchText);
-const patch = Patch.parse(patchJson);
+const patch = Patcher.parse(patchJson);
 patch.crop();
 
-const svg = drawPatch(patch);
+const svg = drawPatch(patch, false);
 console.log(svg);

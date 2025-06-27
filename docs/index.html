@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>max-draw</title>
+    <style>
+      body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2em;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        background-color: #111;
+        color: #ccc;
+        line-height: 1.5;
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+      }
+
+      svg {
+        background: #222;
+        width: 100%;
+      }
+
+      h1,
+      p {
+        margin: 0;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 1em;
+      }
+
+      .toolbar button {
+        border: none;
+        padding: 0.4em;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #ccc;
+      }
+
+      .toolbar button:hover {
+        background-color: #bbb;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      a {
+        color: #4a96e2;
+      }
+
+      .error {
+        color: #e55;
+        background: #e551;
+        border-radius: 5px;
+        padding: 1em;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-B7PrRi3-.js"></script>
+  </head>
+  <body>
+    <h1>max-draw</h1>
+    <p>
+      Convert
+      <a href="https://cycling74.com/products/max" target="_blank">Max</a>
+      patcher files (.maxpat) to SVG images. Supports .maxpat files, as well as
+      json snippets copied from a patch, from a file or your clipboard.
+    </p>
+    <p>
+      Not many graphical objects have custom graphics yet, missing objects will
+      be shown with a placeholder.
+    </p>
+    <p>
+      Made by <a href="https://fyris.me/" target="_blank">@fyrisme</a>, code on
+      <a href="https://github.com/fyrisme/max-draw" target="_blank">github</a>.
+    </p>
+    <div class="toolbar">
+      <button id="open-file">Open patch file</button>
+      <button id="open-clipboard">Load from clipboard</button>
+      <button id="download" class="hide">Download SVG</button>
+    </div>
+    <div class="error hide">Failed to render...</div>
+  </body>
+</html>
